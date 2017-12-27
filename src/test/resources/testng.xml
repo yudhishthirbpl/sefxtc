@@ -3,6 +3,8 @@
 
 <suite name = "Suite01">
    <test name = "test01">
+      <parameter name="webdriver.chrome.driver" value="/home/ykaushik/ci-cd/selenium/chromedriver"/>
+      <parameter name="appUrl" value="http://localhost:9989/index.html"/>
       <classes>
          <class name = "com.devops.testsuites.suite01.MatchPageTitleTest"/>
       </classes>
