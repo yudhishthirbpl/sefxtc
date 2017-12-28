@@ -21,7 +21,6 @@ public class MatchPageTitleTest {
 	private String hubURL;
 	private String actualPageTitle;
 	
-	
 	@Parameters({ "webdriver.chrome.driver", "appUrl", "hubUrl" })
 	@BeforeClass
 	public void testSetUp(String chromeDriverPath, String appUrl, String hubUrl) throws Exception{
