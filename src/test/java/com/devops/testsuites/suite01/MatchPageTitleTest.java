@@ -20,17 +20,31 @@ public class MatchPageTitleTest {
 	private String appURL;
 	private String hubURL;
 	private String actualPageTitle;
+	DesiredCapabilities browser;
 	
-	@Parameters({ "webdriver.chrome.driver", "appUrl", "hubUrl" })
+	@Parameters({ "webdriver.chrome.driver", "appUrl", "hubUrl", "browserToUse" })
 	@BeforeClass
-	public void testSetUp(String chromeDriverPath, String appUrl, String hubUrl) throws Exception{
+	public void testSetUp(String chromeDriverPath, String appUrl, String hubUrl, String browserToUse) throws Exception{
 		//System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 		appURL = appUrl;
 		hubURL = hubUrl;
 		actualPageTitle = "Cars Reports";
 		System.out.println("Property = " + System.getProperty("webdriver.chrome.driver"));
-		DesiredCapabilities browser = DesiredCapabilities.chrome();
-		browser.setPlatform(Platform.LINUX);
+		if(browserToUse == null || browserToUse.trim().length() == 0) {
+			throw new IllegalArgumentException("Err-01:browserToUse parameter is null or not available in testng.xml");
+		}else if(browserToUse.trim().equalsIgnoreCase("firefox")) {
+			browser = DesiredCapabilities.firefox();
+		}else if(browserToUse.trim().equalsIgnoreCase("chrome")) {
+			browser = DesiredCapabilities.chrome();
+		}else {
+			//use firefox as default browser
+			browser = DesiredCapabilities.firefox();
+		}
+		
+		if(browser != null){
+			browser.setPlatform(Platform.LINUX);
+		}
+
 		/**
 		 * 
 		 * Edit /opt/google/chrome/google-chrome wrapper script and replace 
